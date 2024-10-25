@@ -1,0 +1,6 @@
+{
+    "entity": "carts",
+    "endpoint": "https://fakestoreapi.com/carts",
+    "ingestion_mode": "daily_filter",
+    "fields": ["id","userId","date","products","__v"]
+}
