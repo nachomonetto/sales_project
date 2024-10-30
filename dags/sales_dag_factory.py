@@ -86,7 +86,7 @@ def generate_dag(entity_json):
             state = 'OK' if nan_count == 0 else 'Failed'
             return ('null values rule',state)
             
-        #validate data
+        #validate master data
         def validate_entity_master(ds_nodash):
             df=pd.read_csv(file_name_master+ds_nodash+'.csv')
             rules=[]
