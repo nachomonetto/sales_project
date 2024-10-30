@@ -11,9 +11,13 @@ En cuando al diseño del pipeline, se optó por un solo archivo .py, en el cual 
 El objetivo de esta Dag Factory es crear un Dag por cada entidad que se quiera ingestar. Por ejemplo, para nuestro caso, se buscan ingestar las entidades Products y Carts.
 
 Para lograr esto, se crean un archivo .json para cada entidad que se quiera ingestar. Dentro de este json se definen los siguientes parámetros:
+
      entity: nombre de la entidad a ingestar.
+     
      endpoint: endpoint de la entidad a ingestar.
+     
      ingestion_mode: modo de ingesta como se quiere ingestar la entidad. Puede ser "daily_filter" donde se busca ingestar los datos a partir de un filtro de fecha. O puede ser snapshot, donde se trae la foto completa para esa entidad.
+     
      fields: campos que se quieren traer de la entidad.
 
 
@@ -26,13 +30,19 @@ Así se logra tener una capa de abstracción más, haciendo más robusto el pipe
 Las tasks que se presentan en cada Dag son:
 
 ext_entity: Extrae los datos de la api y los guarda en la capa raw.
+
 val_entity_raw: Valida que se cumplan ciertas reglas de calidad para los datos en raw. Por simplificación, por el momento se introdujo una sola regla de calidad, la cual valida que el json recogido desde la api tenga realmente datos.
+
 trf_entity: Transforma los datos del json en raw, a un archivo csv en master.
+
 val_entity_master: Valida que se cumplan ciertas reglas de calidad para los datos en master. Por simplificación, por el momento se introdujo una sola regla de calidad, la cual valida que no existan datos nulos.
+
 load_entity: Carga los datos del csv en master, a una BD Postgresql.
 
 
 Consideraciones importantes:
+
 -Las capas raw y master del datalake, optimamente se podrían haber implementado en un almacenamiento en la nube como ser el servicio de S3 de AWS. Para fines practicos, el datalake se implementó dentro del mismo repositorio.
+
 -Para resolver el calculo de la métrica pedida en el enunciado, se utilizó una vista creada en la BD. Optimamente, se podría haber usado DBT como herramienta que permite hacer un mejor mantenimiento de los ETLs, mejor entendimiento, y favorecer la trazabilidad.
 
