@@ -1,0 +1,2 @@
+id,userid,date,products,__v
+2,1,2020-01-02T00:00:00.000Z,"[{'productId': 2, 'quantity': 4}, {'productId': 1, 'quantity': 10}, {'productId': 5, 'quantity': 2}]",0

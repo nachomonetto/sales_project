@@ -1,0 +1,6 @@
+{
+    "entity": "products",
+    "endpoint": "https://fakestoreapi.com/products",
+    "ingestion_mode": "snapshot",
+    "fields": ["id","title","price","description","category","image","rating"]
+}
