@@ -5,6 +5,7 @@ Los datos ingestados cuentan con los siguientes estadíos:
   2) Capa Master: Segunda capa del datalake, donde los datos ya son formateados a csv.
   3) Tablas en base de datos: Después de la capa master, los datos son guardados en ciertas tablas de la BD Postgresql.
   4) Vistas en base de datos: Por último, los datos son presentados al usuario final a través de vistas, en las cuales se pueden reflejar distintas métricas calculadas en base a los datos ingestados.
+
 En cuando al diseño del pipeline, se optó por un solo archivo .py, en el cual se refleja una Dag Factory, es decir, un algoritmo que permite crear en tiempos de compilación uno o más Dags de Airflow con la existencia de un solo archivo .py (sales_dag_factory.py).
 El objetivo de esta Dag Factory es crear un Dag por cada entidad que se quiera ingestar. Por ejemplo, para nuestro caso, se buscan ingestar las entidades Products y Carts.
 Para lograr esto, se crean un archivo .json para cada entidad que se quiera ingestar. Dentro de este json se definen los siguientes parámetros:
